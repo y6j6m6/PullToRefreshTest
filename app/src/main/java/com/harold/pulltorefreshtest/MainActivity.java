@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
             public void onPullEvent(PullToRefreshBase<ListView> refreshView, PullToRefreshBase.State state, PullToRefreshBase.Mode direction) {
                 // Do work to refresh the list here.
                 Log.d("MainActivity","onRefresh");
-                Toast.makeText(getApplicationContext(),"당겼습니다.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"새로고침 시작",Toast.LENGTH_SHORT).show();
                 new GetDataTask().execute();
             }
         });
@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
         @Override
         protected String[] doInBackground(Void... params) {
             Log.d("GetDataTask","doInBackground");
+            Toast.makeText(getApplicationContext(),"새로고침 진행중",Toast.LENGTH_SHORT).show();
             return new String[0];
         }
 
@@ -44,6 +45,7 @@ public class MainActivity extends Activity {
         protected void onPostExecute(String[] result) {
             // Call onRefreshComplete when the list has been refreshed.
             Log.d("GetDataTask","onPostExecute");
+            Toast.makeText(getApplicationContext(),"새로고침 완료",Toast.LENGTH_SHORT).show();
             pullToRefreshView.onRefreshComplete();
             super.onPostExecute(result);
         }
